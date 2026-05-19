@@ -38,8 +38,7 @@ if __name__ == "__main__":
     print("="*50 + "\n")
 
     input("Pressione Enter para gerar o gráfico da trajetória...")
-    
-    #  Geração do Gráfico 
+#  Geração do Gráfico 
     tempos = np.linspace(0, raiz + 2, 100)
     alturas = f(tempos)
 

@@ -73,8 +73,6 @@ def falsa_posicao(
     erro_final = abs(f(ponto))
     return ponto, iteracoes, erro_final
 
-# Substitua a função newton_raphson no methods.py por esta:
-
 def newton_raphson(
     f, derivada_f, chute_inicial: float, tolerancia: float = 1e-5, max_iteracoes: int = 20
 ) -> list:
