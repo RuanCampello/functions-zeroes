@@ -72,3 +72,29 @@ def falsa_posicao(
 
     erro_final = abs(f(ponto))
     return ponto, iteracoes, erro_final
+
+# Substitua a função newton_raphson no methods.py por esta:
+
+def newton_raphson(
+    f, derivada_f, chute_inicial: float, tolerancia: float = 1e-5, max_iteracoes: int = 20
+) -> list:
+    """
+    Método de Newton-Raphson para encontrar raízes.
+    Retorna uma lista de tuplas com o histórico: [(t_novo, erro), ...]
+    """
+    t = chute_inicial
+    historico = []
+    
+    for i in range(max_iteracoes):
+        t_novo = t - (f(t) / derivada_f(t))
+        erro = abs(f(t_novo))
+        
+        # Guardamos o passo atual no histórico
+        historico.append((t_novo, erro))
+        
+        if erro < tolerancia:
+            break
+            
+        t = t_novo
+        
+    return historico
