@@ -18,7 +18,7 @@ def bisseccao(
 
     iteracoes = 0
 
-    while (a - b) / 2 > tolerancia and iteracoes < max:
+    while (b - a) / 2 > tolerancia and iteracoes < max:
         ponto_medio = (a + b) / 2
         valor_no_ponto_medio = f(ponto_medio)
 
@@ -32,7 +32,7 @@ def bisseccao(
         iteracoes += 1
 
     raiz = (a + b) / 2
-    erro_final = (a - b) / 2
+    erro_final = (b - a) / 2
 
     return raiz, iteracoes, erro_final
 
@@ -73,26 +73,27 @@ def falsa_posicao(
     erro_final = abs(f(ponto))
     return ponto, iteracoes, erro_final
 
+
 def newton_raphson(
-    f, derivada_f, chute_inicial: float, tolerancia: float = 1e-5, max_iteracoes: int = 20
-) -> list:
+    f,
+    derivada_f,
+    chute_inicial: float,
+    tolerancia: float = 1e-5,
+    max_iteracoes: int = 20,
+) -> Tuple[float, int, float]:
     """
     Método de Newton-Raphson para encontrar raízes.
     Retorna uma lista de tuplas com o histórico: [(t_novo, erro), ...]
     """
     t = chute_inicial
-    historico = []
-    
-    for i in range(max_iteracoes):
+
+    for iteracoes in range(max_iteracoes):
         t_novo = t - (f(t) / derivada_f(t))
         erro = abs(f(t_novo))
-        
-        # Guardamos o passo atual no histórico
-        historico.append((t_novo, erro))
-        
+
         if erro < tolerancia:
-            break
-            
+            return t_novo, iteracoes + 1, erro
+
         t = t_novo
-        
-    return historico
+
+    return t, max_iteracoes, abs(f(t))
